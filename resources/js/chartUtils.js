@@ -8,7 +8,7 @@ export function addQuadrantsToChart(quadrants, chart) {
     }
 
     quadrants.forEach(quadrant => {
-        addQuadrant(chart, quadrant.key, quadrant.x1, quadrant.y1, quadrant.x2, quadrant.y2, quadrant.attr);
+        addQuadrant(chart, quadrant.key, quadrant.x1, quadrant.y1, quadrant.x2, quadrant.y2, quadrant.attributes);
     });
 }
 
@@ -18,7 +18,7 @@ export function addLinesToChart(lines, chart) {
     }
 
     lines.forEach(line => {
-        addLine(chart, line.key, line.x1, line.y1, line.x2, line.y2, line.attr);
+        addLine(chart, line.key, line.x1, line.y1, line.x2, line.y2, line.attributes);
     });
 }
 
@@ -28,7 +28,7 @@ export function addTextsToChart(texts, chart) {
     }
 
     texts.forEach(text => {
-        addText(chart, text.key, text.label, text.x, text.y, text.styles, text.attr);
+        addText(chart, text.key, text.label, text.x, text.y, text.styles, text.attributes);
     });
 }
 
