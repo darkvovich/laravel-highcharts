@@ -61,7 +61,7 @@ class Chart implements Arrayable, Jsonable
     }
 
     /**
-     * @param  Series[]  $series
+     * @param Series[] $series
      */
     public function series(array $series): self
     {
@@ -70,9 +70,13 @@ class Chart implements Arrayable, Jsonable
         return $this;
     }
 
-    public function extras(callable $callback): self
+    public function extras(callable|ChartExtras $extras): self
     {
-        $callback($this->extras);
+        if ($extras instanceof ChartExtras) {
+            $this->extras = $extras;
+        } else {
+            $extras($this->extras);
+        }
 
         return $this;
     }
@@ -137,7 +141,7 @@ class Chart implements Arrayable, Jsonable
     {
         return $this->set('credits.enabled', true)
             ->set('credits.text', $text)
-            ->when($url, fn (self $chart) => $chart->set('credits.href', $url));
+            ->when($url, fn(self $chart) => $chart->set('credits.href', $url));
     }
 
     public function withoutLegend(): self
