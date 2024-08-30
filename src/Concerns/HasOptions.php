@@ -17,6 +17,8 @@ trait HasOptions
 
     public function setMany(array $options = []): self
     {
+        $options = Arr::dot($options);
+
         foreach ($options as $key => $value) {
             $this->set($key, $value);
         }
