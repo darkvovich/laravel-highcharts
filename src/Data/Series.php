@@ -52,6 +52,16 @@ class Series implements Arrayable, Jsonable
         return $this->set('dataLabels.enabled', false);
     }
 
+    public function name(string $name): self
+    {
+        return $this->set('name', $name);
+    }
+
+    public function id(string $id): self
+    {
+        return $this->set('id', $id);
+    }
+
     /**
      * @param  array<DataPoint|string|array>  $data
      */
@@ -64,10 +74,10 @@ class Series implements Arrayable, Jsonable
 
     public function toArray(): array
     {
-        $data = $this->options;
+        $series = $this->options;
 
         if ($this->data) {
-            $data['data'] = collect($this->data)
+            $series['data'] = collect($this->data)
                 ->map(fn ($dataPoint) => $dataPoint instanceof DataPoint
                     ? $dataPoint->toArray()
                     : $dataPoint)
@@ -75,10 +85,10 @@ class Series implements Arrayable, Jsonable
         }
 
         if ($this->type) {
-            $data['type'] = $this->type;
+            $series['type'] = $this->type;
         }
 
-        return $data;
+        return $series;
     }
 
     public function dump(...$args)
