@@ -8,9 +8,9 @@ trait ConfiguresChartType
 {
     public ?string $type = null;
 
-    public function type(string $type): self
+    public function type(ChartTypes|string $type): self
     {
-        $this->type = $type;
+        $this->type = $type instanceof ChartTypes ? $type->value : $type;
 
         return $this;
     }
