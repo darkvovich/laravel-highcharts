@@ -39,6 +39,16 @@ class ChartExtras implements Arrayable, Jsonable
      */
     public array $quadrants = [];
 
+    /**
+     * @param array<ChartLabel> $labels
+     */
+    public function labels(array $labels = []): self
+    {
+        $this->labels = $labels;
+
+        return $this;
+    }
+
     public function addLabel(ChartLabel $label): self
     {
         $this->labels[] = $label;
@@ -46,9 +56,29 @@ class ChartExtras implements Arrayable, Jsonable
         return $this;
     }
 
+    /**
+     * @param array<ChartLine> $lines
+     */
+    public function lines(array $lines = []): self
+    {
+        $this->lines = $lines;
+
+        return $this;
+    }
+
     public function addLine(ChartLine $line): self
     {
         $this->lines[] = $line;
+
+        return $this;
+    }
+
+    /**
+     * @param array<ChartQuadrant> $quadrants
+     */
+    public function quadrants(array $quadrants = []): self
+    {
+        $this->quadrants = $quadrants;
 
         return $this;
     }
