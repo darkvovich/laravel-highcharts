@@ -10,6 +10,7 @@ use BernskioldMedia\LaravelHighcharts\Concerns\HasOptions;
 use BernskioldMedia\LaravelHighcharts\Concerns\Makeable;
 use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Contracts\Support\Jsonable;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Traits\Conditionable;
 use Illuminate\Support\Traits\Tappable;
 
@@ -29,15 +30,12 @@ class Series implements Arrayable, Jsonable
         Makeable,
         Tappable;
 
-    /**
-     * @var array<DataPoint|string|array>
-     */
-    public array $data = [];
+    public ?Collection $data = null;
 
     /**
-     * @param  array<DataPoint|string|array>  $data
+     * @param array<DataPoint|string|array> $data
      */
-    public function __construct(array $data = [])
+    public function __construct(Collection|array $data = null)
     {
         $this->data($data);
     }
@@ -63,9 +61,9 @@ class Series implements Arrayable, Jsonable
     }
 
     /**
-     * @param  array<DataPoint|string|array>  $data
+     * @param Collection<DataPoint|string|array>|array<DataPoint|string|array>|null $data
      */
-    public function data(array $data): self
+    public function data(Collection|array|null $data = null): self
     {
         $this->data = $data;
 
@@ -76,12 +74,10 @@ class Series implements Arrayable, Jsonable
     {
         $series = $this->options;
 
-        if ($this->data) {
-            $series['data'] = collect($this->data)
-                ->map(fn ($dataPoint) => $dataPoint instanceof DataPoint
-                    ? $dataPoint->toArray()
-                    : $dataPoint)
-                ->toArray();
+        if ($this->data !== null) {
+            $data = $this->data instanceof Collection ? $this->data : collect($this->data);
+
+            $series['data'] = $data->toArray();
         }
 
         if ($this->type) {
