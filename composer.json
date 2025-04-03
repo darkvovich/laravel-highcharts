@@ -1,13 +1,13 @@
 {
-    "name": "bernskioldmedia/laravel-highcharts",
+    "name": "darkvovich/laravel-highcharts",
     "description": "A Laravel and Livewire wrapper for Highcharts.",
     "keywords": [
-        "bernskioldmedia",
+        "darkvovich",
         "laravel",
         "livewire",
         "highcharts"
     ],
-    "homepage": "https://github.com/bernskioldmedia/laravel-highcharts",
+    "homepage": "https://github.com/darkvovich/laravel-highcharts",
     "license": "MIT",
     "authors": [
         {
